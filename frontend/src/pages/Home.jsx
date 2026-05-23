@@ -1,14 +1,16 @@
 import React from 'react'
-import Navbar from '../components/Navbar' // Navbar ko import kiya
+import Navbar from '../components/Navbar'
+import Features from '../components/Features'
 
 function Home() {
   return (
     <div className="min-h-screen bg-slate-900 text-white selection:bg-yellow-400 selection:text-slate-900">
+      {/* Navbar sabse upar */}
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 flex flex-col items-center justify-center text-center">
-        {/* Decorative Background Blob */}
+      <section className="relative pt-40 pb-20 px-6 flex flex-col items-center justify-center text-center">
+        {/* Background Decorative Blur */}
         <div className="absolute top-20 left-1/2 -translate-x-1/2 w-72 h-72 bg-blue-600 rounded-full blur-[120px] opacity-30 -z-10"></div>
         
         <h1 className="text-5xl md:text-8xl font-black mb-6 leading-tight">
@@ -28,6 +30,14 @@ function Home() {
           </button>
         </div>
       </section>
+
+      {/* Features Cards Section */}
+      <Features />
+
+      {/* Simple Footer */}
+      <footer className="py-10 text-center text-gray-500 text-sm border-t border-slate-800 mt-20">
+        © 2024 NexGen CareerForge. Built with Courage by a Pakistani Developer.
+      </footer>
     </div>
   )
 }
