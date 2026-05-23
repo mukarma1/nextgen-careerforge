@@ -28,9 +28,11 @@ function Home() {
             Audit My Resume
           </button>
           </Link>
+          <Link to="/dsa">
           <button className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-xl">
             Track DSA Progress
           </button>
+          </Link>
         </div>
       </section>
 
