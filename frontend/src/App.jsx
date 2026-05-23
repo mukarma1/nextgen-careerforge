@@ -1,8 +1,10 @@
+import React from 'react'
+import Home from './pages/Home' // Humne Home page ko bulaya
+
 function App() {
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', padding: '40px' }}>
-      <h1>CareerForge</h1>
-      <p>Your student career readiness platform</p>
+    <div>
+      <Home /> {/* Home page ko yahan dikhaya */}
     </div>
   )
 }
