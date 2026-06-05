@@ -1,22 +1,24 @@
-// ⚠️ CRITICAL: This MUST be the FIRST line - before ANY other imports
+// ⚠️ CRITICAL: DNS fix
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 
 // ========== MIDDLEWARES ==========
-// Middleware 1: JSON parser (yeh har request se pehle run hoga)
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json());
 
-// Middleware 2: Logger (optional - har request log karne ke liye)
-app.use((req, res, next) => {
-  console.log(`📝 ${req.method} request on ${req.url}`);
-  next(); // Important! Agle route/middleware pe jao
-});
+// ========== IMPORT ROUTES ==========
+const authRoutes = require('./routes/authRoutes');
+const dsaRoutes = require('./routes/dsaRoutes');  // ✅ MUST HAVE
 
 // ========== DATABASE CONNECTION ==========
 const connectDB = async () => {
@@ -36,35 +38,24 @@ const connectDB = async () => {
 connectDB();
 
 // ========== ROUTES ==========
-// Test route
 app.get('/', (req, res) => {
   res.json({ message: 'Server is running' });
 });
 
-// ✅ YAHAN PE APNE AUTH ROUTES ADD KARO
-// Auth routes (import karna hoga)
-const authRoutes = require('./routes/authRoutes');
-app.use('/api/auth', authRoutes);  // Sab auth routes yahan handle honge
+app.use('/api/auth', authRoutes);
+app.use('/api/dsa', dsaRoutes);  // ✅ MUST HAVE
 
-// Future routes yahan add karna
-// app.use('/api/dsa', dsaRoutes);
-// app.use('/api/resume', resumeRoutes);
-
-// ========== ERROR HANDLING MIDDLEWARE (Last mein aata hai) ==========
-// Agar koi route match nahi hota toh 404
+// ========== 404 HANDLER ==========
 app.use((req, res) => {
-  res.status(404).json({ message: 'Route not found' });
+  console.log(`❌ Route not found: ${req.method} ${req.url}`);
+  res.status(404).json({ message: `Route not found: ${req.method} ${req.url}` });
 });
 
-// Global error handler
-app.use((err, req, res, next) => {
-  console.error('❌ Error:', err.message);
-  res.status(500).json({ message: 'Something went wrong!', error: err.message });
-});
-
-// ========== SERVER START ==========
+// ========== START SERVER ==========
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📡 Using DNS servers: ${dns.getServers().join(', ')}`);
+  console.log(`✅ Auth routes: /api/auth`);
+  console.log(`✅ DSA routes: /api/dsa`);
 });
