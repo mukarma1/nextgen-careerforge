@@ -14,6 +14,7 @@ function Navbar() {
         <li className="hover:text-yellow-400 cursor-pointer transition">Roadmap</li>
         <li className="hover:text-yellow-400 cursor-pointer transition">DSA Tracker</li>
         <li className="hover:text-yellow-400 cursor-pointer transition">AI Audit</li>
+        <Link to="/resume-analyzer">Resume Analyzer</Link>
       </ul>
 
       {/* Action Button */}

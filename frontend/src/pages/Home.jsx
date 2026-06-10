@@ -1,50 +1,69 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import Features from '../components/Features'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <div className="min-h-screen bg-slate-900 text-white selection:bg-yellow-400 selection:text-slate-900">
-      {/* Navbar sabse upar */}
-      <Navbar />
-      
-      {/* Hero Section */}
-      <section className="relative pt-40 pb-20 px-6 flex flex-col items-center justify-center text-center">
-        {/* Background Decorative Blur */}
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-72 h-72 bg-blue-600 rounded-full blur-[120px] opacity-30 -z-10"></div>
-        
-        <h1 className="text-5xl md:text-8xl font-black mb-6 leading-tight">
-          Master Your Big Tech <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500"></span> Journey
-        </h1>
-        
-        <p className="text-gray-400 text-lg md:text-xl max-w-3xl mb-10 leading-relaxed">
-          The ultimate job-prep cockpit. Scan your resume with AI, track your DSA progress, and secure your academic vault—all in one place.
-        </p>
-
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
-         <Link to="/audit">
-          <button className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-xl">
-            Audit My Resume
-          </button>
-          </Link>
-          <Link to="/dsa">
-          <button className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-xl font-bold text-lg transition-all transform hover:scale-105 shadow-xl">
-            Track DSA Progress
-          </button>
-          </Link>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      {/* Navbar */}
+      <nav className="bg-white shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="text-xl font-bold text-indigo-600">
+              NexGen CareerForge
+            </div>
+            <div className="flex gap-4">
+              <Link to="/login" className="text-gray-700 hover:text-indigo-600">
+                Login
+              </Link>
+              <Link to="/signup" className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                Sign Up
+              </Link>
+            </div>
+          </div>
         </div>
-      </section>
+      </nav>
 
-      {/* Features Cards Section */}
-      <Features />
+      {/* Hero Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center">
+          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            Welcome to <span className="text-indigo-600">NexGen CareerForge</span>
+          </h1>
+          <p className="text-xl text-gray-600 mb-8">
+            Your AI-powered career development platform
+          </p>
+          <div className="flex justify-center gap-4">
+            <Link to="/signup" className="bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-indigo-700">
+              Get Started
+            </Link>
+            <Link to="/login" className="border-2 border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg text-lg hover:bg-indigo-50">
+              Login
+            </Link>
+          </div>
+        </div>
+      </div>
 
-      {/* Simple Footer */}
-      <footer className="py-10 text-center text-gray-500 text-sm border-t border-slate-800 mt-20">
-        © 2026 NexGen CareerForge. Built with Courage by a Pakistani Developer.
-      </footer>
+      {/* Features Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="bg-white p-6 rounded-xl shadow-md">
+            <div className="text-3xl mb-4">📊</div>
+            <h3 className="text-xl font-semibold mb-2">DSA Progress Tracker</h3>
+            <p className="text-gray-600">Track your coding journey and monitor improvement</p>
+          </div>
+          <div className="bg-white p-6 rounded-xl shadow-md">
+            <div className="text-3xl mb-4">📄</div>
+            <h3 className="text-xl font-semibold mb-2">Resume Analyzer</h3>
+            <p className="text-gray-600">AI-powered resume analysis and suggestions</p>
+          </div>
+          <div className="bg-white p-6 rounded-xl shadow-md">
+            <div className="text-3xl mb-4">🎯</div>
+            <h3 className="text-xl font-semibold mb-2">Job Preparation</h3>
+            <p className="text-gray-600">Interview prep and career guidance</p>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-
+export default Home;
