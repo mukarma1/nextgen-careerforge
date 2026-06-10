@@ -6,8 +6,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+  console.log('📁 Created uploads directory');
+}
 
 // ========== MIDDLEWARES ==========
 app.use(cors({
@@ -15,10 +22,13 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 // ========== IMPORT ROUTES ==========
 const authRoutes = require('./routes/authRoutes');
 const dsaRoutes = require('./routes/dsaRoutes');  // ✅ MUST HAVE
+const resumeRoutes = require('./routes/resumeRoutes');
 
 // ========== DATABASE CONNECTION ==========
 const connectDB = async () => {
@@ -44,6 +54,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/dsa', dsaRoutes);  // ✅ MUST HAVE
+app.use('/api/resume', resumeRoutes);
 
 // ========== 404 HANDLER ==========
 app.use((req, res) => {
@@ -58,4 +69,5 @@ app.listen(PORT, () => {
   console.log(`📡 Using DNS servers: ${dns.getServers().join(', ')}`);
   console.log(`✅ Auth routes: /api/auth`);
   console.log(`✅ DSA routes: /api/dsa`);
+  console.log(`✅ Resume routes: /api/resume`);
 });
